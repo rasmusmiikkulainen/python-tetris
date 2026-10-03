@@ -14,95 +14,110 @@ A simple TUI implementation of Tetris made in Python.
 
 ## UML chart (WIP)
 
-```plantuml
-hide circle
-class UIElement as "**UIElement**"
-class Game as "**Game**" {
+```mermaid
+classDiagram
+    class UIElement
+
+class Game {
     paused
     pause()
 }
-class PauseMenu as "**PauseMenu**" {
+
+class PauseMenu {
     position
 }
-class Hold as "**Hold**" {
+
+class Hold {
     position
     tetromino
 }
-class Playfield as "**Playfield**" {
+
+class Playfield {
     position
     lines
     has_tetris()
     clear_line()
     clear()
 }
-class Stats as "**Stats**" {
+
+class Stats {
     position
     score
     lines
     time
 }
-class Queue as "**Queue**" {
+
+class Queue {
     position
     queue
     bag
     get_bag()
     update_queue()
 }
-class Tetromino as "**Tetromino**" {
+
+class Tetromino {
     position
     rotation
     hard_drop()
     soft_drop()
     rotate()
 }
-class IShape as "**IShape**" {
-    shape
-    color
-}
-class JShape as "**JShape**" {
-    shape
-    color
-}
-class LShape as "**LShape**" {
-    shape
-    color
-}
-class OShape as "**OShape**" {
-    shape
-    color
-}
-class SShape as "**SShape**" {
-    shape
-    color
-}
-class ZShape as "**ZShape**" {
-    shape
-    color
-}
-class TShape as "**TShape**" {
+
+class IShape {
     shape
     color
 }
 
-class TShape extends Tetromino
-class ZShape extends Tetromino
-class SShape extends Tetromino
-class OShape extends Tetromino
-class LShape extends Tetromino
-class JShape extends Tetromino
-class IShape extends Tetromino
+class JShape {
+    shape
+    color
+}
 
-class Game extends UIElement
-class Stats extends UIElement
-class Playfield extends Game
-class Queue extends Game
-class PauseMenu extends Game
-class Hold extends Game
+class LShape {
+    shape
+    color
+}
+
+class OShape {
+    shape
+    color
+}
+
+class SShape {
+    shape
+    color
+}
+
+class ZShape {
+    shape
+    color
+}
+
+class TShape {
+    shape
+    color
+}
+
+Tetromino <|-- TShape
+Tetromino <|-- ZShape
+Tetromino <|-- SShape
+Tetromino <|-- OShape
+Tetromino <|-- LShape
+Tetromino <|-- JShape
+Tetromino <|-- IShape
+
+UIElement <|-- Game
+UIElement <|-- Stats
+Game <|-- Playfield
+Game <|-- Queue
+Game <|-- PauseMenu
+Game <|-- Hold
+
 Playfield o-- Tetromino
 Queue o-- Tetromino
-Stats <-- Tetromino
-Stats <-- Playfield
-Hold <-- Playfield
+Tetromino --> Stats
+Playfield --> Stats
+Playfield --> Hold
 ```
 
 ## Expected external dependencies:
