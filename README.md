@@ -16,108 +16,89 @@ A simple TUI implementation of Tetris made in Python.
 
 ```mermaid
 classDiagram
-    class UIElement
-
-class Game {
-    paused
-    pause()
-}
-
-class PauseMenu {
-    position
-}
-
-class Hold {
-    position
-    tetromino
-}
-
-class Playfield {
-    position
-    lines
-    has_tetris()
-    clear_line()
-    clear()
-}
-
-class Stats {
-    position
-    score
-    lines
-    time
-}
-
-class Queue {
-    position
-    queue
-    bag
-    get_bag()
-    update_queue()
-}
-
-class Tetromino {
-    position
-    rotation
-    hard_drop()
-    soft_drop()
-    rotate()
-}
-
-class IShape {
-    shape
-    color
-}
-
-class JShape {
-    shape
-    color
-}
-
-class LShape {
-    shape
-    color
-}
-
-class OShape {
-    shape
-    color
-}
-
-class SShape {
-    shape
-    color
-}
-
-class ZShape {
-    shape
-    color
-}
-
-class TShape {
-    shape
-    color
-}
-
-Tetromino <|-- TShape
-Tetromino <|-- ZShape
-Tetromino <|-- SShape
-Tetromino <|-- OShape
-Tetromino <|-- LShape
-Tetromino <|-- JShape
-Tetromino <|-- IShape
-
-UIElement <|-- Game
-UIElement <|-- Stats
-Game <|-- Playfield
-Game <|-- Queue
-Game <|-- PauseMenu
-Game <|-- Hold
-
-Playfield o-- Tetromino
-Queue o-- Tetromino
-Tetromino --> Stats
-Playfield --> Stats
-Playfield --> Hold
+    class UIElement{
+        fps
+        scale
+    }
+    class Hold{
+        tetromino
+        release_tetromino()
+    }
+    class Playfield{
+        gravity
+        active_tetromino
+        lines
+        hard_drop()
+        soft_drop()
+        rotate_tetromino()
+        hold_tetromino()
+        has_tetris()
+        clear_line()
+        clear()
+        game_over()
+    }
+    class Stats{
+        date
+        level
+        score
+        lines
+        gametime
+        save()
+    }
+    class Queue{
+        queue
+        bag
+        get_bag()
+        update_queue()
+    }
+    class Tetromino{
+        list
+        position
+    }
+    class IShape{
+        shape
+        color
+    }
+    class JShape{
+        shape
+        color
+    }
+    class LShape{
+        shape
+        color
+    }
+    class OShape{
+        shape
+        color
+    }
+    class SShape{
+        shape
+        color
+    }
+    class ZShape{
+        shape
+        color
+    }
+    class TShape{
+        shape
+        color
+    }
+    Tetromino <|-- TShape
+    Tetromino <|-- ZShape
+    Tetromino <|-- SShape
+    Tetromino <|-- OShape
+    Tetromino <|-- LShape
+    Tetromino <|-- JShape
+    Tetromino <|-- IShape
+    UIElement <|-- Stats
+    UIElement <|-- Playfield
+    UIElement <|-- Queue
+    UIElement <|-- Hold
+    Playfield o-- Tetromino: has
+    Queue o-- Tetromino: has
+    Playfield <-- Stats : depends on
+    Hold <-- Playfield : uses
+    Stats <-- Playfield : depends on
 ```
 
 ## Expected external dependencies:
