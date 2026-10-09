@@ -1,4 +1,4 @@
-# Tetris (project for compsci 2)
+# Tetris in Python
 
 A simple TUI implementation of Tetris made in Python.
 
@@ -18,11 +18,32 @@ A simple TUI implementation of Tetris made in Python.
 classDiagram
     class UIElement{
         fps
-        scale
+    }
+    class MainMenu{
+        play()
+        view_stats()
+    }
+    class StatsViewer{
+        pb_time
+        pb_time_date
+        pb_score
+        pb_score_date
+        get_stats()
     }
     class Hold{
         tetromino
         release_tetromino()
+    }
+    class Config{
+        ghost_block
+        rotate_bind
+        soft_drop_bind
+        hard_drop_bind
+        hold_bind
+        left_bind
+        right_bind
+        parse()
+        create_default()
     }
     class Playfield{
         gravity
@@ -30,6 +51,7 @@ classDiagram
         lines
         hard_drop()
         soft_drop()
+        ghost_block()
         rotate_tetromino()
         hold_tetromino()
         has_tetris()
@@ -94,11 +116,16 @@ classDiagram
     UIElement <|-- Playfield
     UIElement <|-- Queue
     UIElement <|-- Hold
+    UIElement <|-- StatsViewer
+    UIElement <|-- MainMenu
     Playfield o-- Tetromino: has
     Queue o-- Tetromino: has
+    StatsViewer o-- Stats: has
     Playfield <-- Stats : depends on
     Hold <-- Playfield : uses
     Stats <-- Playfield : depends on
+    Config <-- Playfield
+    Tetromino <-- Playfield
 ```
 
 ## Expected external dependencies:
